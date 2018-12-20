@@ -1,0 +1,5 @@
+/* 继承样式，如 font 、 color ，会从组件外继承到组件内。 */
+page{
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 32rpx;
+}

@@ -1,0 +1,13 @@
+{
+  "pages": [
+    "pages/classic/classic"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "恋之吻",
+    "navigationStyle": "default",
+    "backgroundColor": "#00ffff",
+    "enablePullDownRefresh": true
+  }
+}

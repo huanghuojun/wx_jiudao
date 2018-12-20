@@ -1,0 +1,33 @@
+<!--pages/classic/classic.wxml-->
+<view class='container'>
+  <view class='header'>
+    <epsoide-cmp class='epsoide' index="{{data.indexes}}"/>
+    <like-cmp class='like' bind:like="onLike" like="{{data.likeStatus}}" count="{{data.favNums}}" />
+  </view>
+
+  <movie-cmp img="{{data.image}}" content="{{data.content}}" />
+  <navi-cmp bind:left="onNext" bind:right="onPrev" title='{{data.title}}' first='{{first}}' latest='{{latest}}' class='navi'/>
+</view>
+
+<!--
+规范：
+js 命名驼峰
+view 对应 div 块
+
+<view class="container">
+    <view class="chunk color1">
+        <text>第一个</text>
+    </view>
+    <view class="chunk color2">
+        <text>第二个</text>
+    </view>
+    <view class="chunk color3">
+        <text>第三个</text>
+    </view>
+
+</view>
+
+
+<text>pages/classic/classic.wxml</text>
+<slider show-value='2'></slider>
+-->

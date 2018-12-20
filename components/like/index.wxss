@@ -1,0 +1,20 @@
+/* components/like/index.wxss */
+.container{
+  display: inline-flex;
+  flex-direction: row;
+  padding: 10rpx;
+  width: 90rpx;
+  /** rpx 自适应 必须以iphone 6 设计图   750 * 1334*/
+}
+
+.container image{
+  width: 32rpx;
+  height: 28rpx; 
+}
+.container text{
+  font-size: 24rpx;
+  color: #dddddd;
+  margin-left: 6rpx;
+  position: relative;
+  line-height: 24rpx;
+}
