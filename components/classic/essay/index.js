@@ -6,7 +6,6 @@ Component({
    */
   behaviors: [classicBeh],
   properties: {
-    
   },
   
   /**
@@ -16,10 +15,14 @@ Component({
 
   },
 
+  attached: function () {
+    console.log("asdada");
+    console.log(this.properties);
+  },
   /**
    * 组件的方法列表
    */
   methods: {
-
+    
   }
 })

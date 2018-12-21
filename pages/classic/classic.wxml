@@ -1,12 +1,14 @@
 <!--pages/classic/classic.wxml-->
 <view class='container'>
   <view class='header'>
-    <epsoide-cmp class='epsoide' index="{{data.indexes}}"/>
-    <like-cmp class='like' bind:like="onLike" like="{{data.likeStatus}}" count="{{data.favNums}}" />
+    <episode-cmp class='episode' index="{{data.indexes}}"/>
+    <like-cmp class='like' bind:like="onLike" like="{{likeStatus}}" count="{{likeCount}}" />
   </view>
-
-  <movie-cmp img="{{data.image}}" content="{{data.content}}" />
-  <navi-cmp bind:left="onNext" bind:right="onPrev" title='{{data.title}}' first='{{first}}' latest='{{latest}}' class='navi'/>
+ <movie-cmp wx:if="{{data.type == 100}}" img="{{data.image}}" content="{{data.content}}" /> 
+ <music-cmp wx:if="{{data.type == 200}}" src="{{data.url}}" title="{{data.title}}" img="{{data.image}}" content="{{data.content}}" /> 
+ <essay-cmp wx:if="{{data.type == 300}}" img="{{data.image}}" content="{{data.content}}" /> 
+ 
+  <navi-cmp bind:left="onNext" bind:right="onPrevious" title='{{data.title}}' first='{{first}}' latest='{{latest}}' class='navi'/>
 </view>
 
 <!--

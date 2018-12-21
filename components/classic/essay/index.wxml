@@ -4,3 +4,4 @@
   <image class='tag' src='images/essay@tag.png'></image>
   <text class='content'>{{content}}</text>
 </View>
+

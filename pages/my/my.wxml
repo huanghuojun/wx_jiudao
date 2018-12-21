@@ -1,0 +1,4 @@
+<!--pages/my/my.wxml-->
+<text>pages/my/my.wxml</text>
+<open-data type="userAvatarUrl"></open-data>
+<open-data type="userNickName"></open-data>
