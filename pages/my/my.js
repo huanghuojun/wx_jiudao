@@ -1,52 +1,49 @@
 // pages/my/my.js
+import { BookModel } from "../../models/book.js"
+import { ClassicModel } from '../../models/classic.js'
+
+const bookModel = new BookModel();
+const classicModel = new ClassicModel();
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    authorized:false,
+    userInfo:null,
+    bookCount:0,
+    likeList:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.login({
-      success:data => {
-        wx.request({
-          url: 'https://api.weixin.qq.com/sns/jscode2session',
-          data: {
-            appid: APP_ID,
-            secret: APP_SECRET,
-            js_code: res.code,
-            grant_type: 'authorization_code'
-          },
-          method: 'GET',
-          success: function (res) {
-            console.log(res.data)
-            OPEN_ID = res.data.openid;//获取到的openid
-            SESSION_KEY = res.data.session_key;//获取到session_key
-            console.log(OPEN_ID.length)
-            console.log(SESSION_KEY.length)
-          
-          }
-        })
-      }
+    this.hasGottenUserInfo();
+    bookModel.getBookCount().then(res=>{
+      this.setData({
+        bookCount:res.data.count
+      })
     })
-    wx.getSetting({
-      success:data => {
-        if(data.authSetting['scope.userInfo']){
-          wx.getUserInfo({
-            success:data => {
-              console.log(data);
-            }
-          })
-        }else{
-
-        }
-      }
-    })
+    classicModel.getMyFavor(res => {
+      this.setData({
+        likeList: res
+      })
+    });
+    // wx.getSetting({
+    //   success:data=>{
+    //     console.log(data)
+    //   }
+    // })
+    // wx.getUserInfo({
+    //   success:data=>{
+    //     console.log(data)
+    //   }
+    // })
+    // 旧版不在使用
+    //
   },
 
   /**
@@ -96,5 +93,38 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  hasGottenUserInfo(){
+    wx.getSetting({
+      success: data => {
+        if (data.authSetting['scope.userInfo']){
+          wx.getUserInfo({
+            success:data=>{
+              this.setData({
+                authorized: true,
+                userInfo: data.userInfo
+              })
+            }
+          })
+        }
+      }
+    })
+  },
+
+  onGetUserInfo(event) {
+    const userInfo = event.detail.userInfo;
+    if (!userInfo){
+      return
+    }
+    this.setData({
+      authorized: true,
+      userInfo: userInfo
+    })
+  },
+  onJumpToAbout(event){
+    wx.navigateTo({
+      url: '/pages/about/about',
+    })
   }
 })

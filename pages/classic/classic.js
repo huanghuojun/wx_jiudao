@@ -1,8 +1,11 @@
 // pages/classic/classic.js
 import { ClassicModel } from '../../models/classic.js'
 import { LikeModel } from '../../models/like.js'
+import { WxCode2sessionModel } from '../../models/wx.js'
+
 let classicModel = new ClassicModel();
 let likeModel = new LikeModel();
+let wxCode2sessionModel = new WxCode2sessionModel();
 
 Page({
 
@@ -22,14 +25,42 @@ Page({
    */
   onLoad: function (options) {
     // 数据保存 Storage
+    wx.login({
+      success(res){
+        console.log(res)
+        wxCode2sessionModel.getCode2session(res.code)
+          .then(data => {
+            console.log(data)
+          });
+      }
+    })
+
+    // 数据保存 Storage
     classicModel.getLatest((res) => {
-      console.log(res.type != 200)
       this.setData({
         data: res,
         likeStatus: res.likeStatus,
         likeCount: res.favNums,
       })
     });
+
+
+    wx.checkSession({
+      success() {
+        console.log("session_key 未过期，并且在本生命周期一直有效");
+        // session_key 未过期，并且在本生命周期一直有效
+      },
+      fail() {
+        // session_key 已经失效，需要重新执行登录流程
+        wx.login({
+          success(res) {
+            console.log(res)
+            
+          }
+        }) // 重新登录
+        console.log("重新登录");
+      }
+    })
   },
 
   /**

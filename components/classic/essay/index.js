@@ -16,7 +16,6 @@ Component({
   },
 
   attached: function () {
-    console.log("asdada");
     console.log(this.properties);
   },
   /**

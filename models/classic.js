@@ -20,6 +20,24 @@ class ClassicModel extends Http{
     })
   }
 
+  getMyFavor(callBack) {
+    this.request({
+      'url': '/classic/favor',
+      success: (res) => {
+        if (res.code == 200) {
+          callBack(res.data);
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      }
+    })
+  }
+
+
   getClassic(index, nextOrPrevious, callBack) {
     // 缓存中寻找
     let key = nextOrPrevious == "next" ? this._getKey(index+1) : this._getKey(index-1);

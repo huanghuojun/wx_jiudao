@@ -1,0 +1,46 @@
+<!--components/search/index.wxml-->
+<view class='container'>
+  <view class='header'>
+    <view class='search-container'>
+      <image class='icon' src='images/search.png'></image>
+      <input value='{{keyword}}' bindconfirm='onConfirm' placeholder-class='in-bar' placeholder='书籍名' class='bar' auto-focus='true'></input>
+      <image class='cancel-img' src='images/cancel.png' bindtap='onDelete'></image>
+    </view>
+    <view class='cancel' bindtap='onCancel'>取消</view>
+  </view>
+
+  <view wx:if="{{!searching}}">
+    <view class='history'>
+      <view class='title'>
+        <view class='chunk'></view>
+        <text>历史搜索</text>
+      </view>
+      <view class='tags'>
+        <block wx:for="{{historyWords}}" wx:key="historyWords">
+          <tag-cmp bind:tapping="onConfirm" text="{{item}}" />
+        </block>
+      </view>
+    </view>
+     <view class='history hot-search'>
+      <view class='title'>
+        <view class='chunk'></view>
+        <text>热门搜索</text>
+      </view>
+       <view class='tags'>
+        <block wx:for="{{hotWords}}" wx:key="hotWords">
+          <tag-cmp bind:tapping="onConfirm" text="{{item.content}}" />
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <view class="books-container" wx:else>
+    <!-- 列表中如果只是数字或者字符串 wx:key="*.this"-->
+    <block wx:for="{{dataArray}}" wx:key="itemName.id" wx:for-item="itemName"> 
+      <book-cmp show-like="{{false}}" book="{{itemName}}"/>
+    </block>
+  </view>
+  <loading-cmp class='loading-center' wx:if="{{loadingCenter}}"/>
+  <loading-cmp class='loading' wx:if="{{loading}}"/>
+  <text wx:if="{{nullResult}}" class='empty-tip'>没有搜索到书籍</text>
+</view>

@@ -33,8 +33,6 @@ Component({
       year:year,
       month:this.data.months[month]
     });
-    console.log(typeof(Number));
-    console.log(this.properties);
   },
   /**
    * 组件的方法列表

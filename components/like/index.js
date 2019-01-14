@@ -18,6 +18,10 @@ Component({
       observer:function(){
 
       }
+    },
+    readOnly:{
+      type:Boolean,
+      value:false,
     }
   },
 
@@ -41,6 +45,9 @@ Component({
   methods: {
     // 自定义事件
     onLike:function(event){
+      if (this.properties.readOnly){
+        return;
+      }
       let like = this.properties.like;
       let count = this.properties.count;
       

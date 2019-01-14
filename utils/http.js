@@ -21,7 +21,6 @@ class Http{
       },
       success: (res) => {
         let code = res.statusCode.toString();
-        console.log(code);
         if(code.startsWith("2")){
           params.success && params.success(res.data);
         }else{

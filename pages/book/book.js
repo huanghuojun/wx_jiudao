@@ -1,29 +1,41 @@
 // pages/book/book.js
+import { BookModel } from '../../models/book.js'
+import { random } from '../../utils/util.js'
+let bookModel = new BookModel();
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    books:[],
+    searching:false,
+    more: ''
   },
   
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // Promise 对象
-    const promise = new Promise((reslove, reject)=>{
-      // pending(进行中) fulfilled(已成功) rejected(已失败)
-      wx.getSystemInfo({
-        success: res => reslove(res),
-        fail: error => reject(error)
+    bookModel.getHotList()
+    .then(res => {
+      this.setData({
+        books:res.data
       })
-    });
-    promise.then(
-      res=> console.log(res) ,
-      error => console.log(error)
-    )
+    })
+    // // Promise 对象
+    // const promise = new Promise((reslove, reject)=>{
+    //   // pending(进行中) fulfilled(已成功) rejected(已失败)
+    //   wx.getSystemInfo({
+    //     success: res => reslove(res),
+    //     fail: error => reject(error)
+    //   })
+    // });
+    // promise.then(
+    //   res=> console.log(res) ,
+    //   error => console.log(error)
+    // )
   },
 
   /**
@@ -73,5 +85,21 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  onSearch(event){
+    this.setData({
+      searching:true
+    })
+  },
+  onCancel(event){
+    this.setData({
+      searching: false
+    })
+  },
+  onReachBottom() {
+    // 向组件发送通知
+    this.setData({
+      more: random(16)
+    })
   }
 })

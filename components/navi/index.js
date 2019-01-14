@@ -30,7 +30,7 @@ Component({
    */
   methods: {
     onLeft:function(event){
-      if(!this.properties.latest){
+      if (!this.properties.latest) {
         this.triggerEvent('left', {}, {})
       }
     },

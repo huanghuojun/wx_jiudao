@@ -2,7 +2,12 @@
 <view class='container'>
   <view class='header'>
     <episode-cmp class='episode' index="{{data.indexes}}"/>
-    <like-cmp class='like' bind:like="onLike" like="{{likeStatus}}" count="{{likeCount}}" />
+    <view class='like-container'>
+      <like-cmp class='like' bind:like="onLike" like="{{likeStatus}}" count="{{likeCount}}" />
+      <button-cmp open-type='share' class='share-btn'>
+        <image slot='img'  class='share' src='/images/icon/share.png'></image>
+      </button-cmp>
+    </view>
   </view>
  <movie-cmp wx:if="{{data.type == 100}}" img="{{data.image}}" content="{{data.content}}" /> 
  <music-cmp wx:if="{{data.type == 200}}" src="{{data.url}}" title="{{data.title}}" img="{{data.image}}" content="{{data.content}}" /> 

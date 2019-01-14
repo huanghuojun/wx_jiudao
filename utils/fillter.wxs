@@ -1,0 +1,20 @@
+var format = function(text){
+  // wxs
+  if(!text){
+    return;
+  }
+  var reg = getRegExp('\\\\n','g');
+  return '&nbsp;&nbsp;&nbsp;&nbsp;'+text.replace(reg, '\n&nbsp;&nbsp;&nbsp;&nbsp;');
+}
+
+var limit = function(array, length){
+  return array.slice(0, length);
+}
+// 是一个独立模块，跟ES6不一样
+// 不能用const， const是javascript中的ES6语法
+// wxs 不等同javascript，只是语法形式一样，
+
+module.exports={
+  format:format,
+  limit: limit,
+}

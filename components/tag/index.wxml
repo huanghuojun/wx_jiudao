@@ -1,0 +1,8 @@
+<!--components/tag/index.wxml-->
+<view class="container tag-class" bindtap='onTap'>
+  <text>{{text}}</text>
+   <!-- <text>{{number}}</text> -->
+   <slot name="alter"></slot>
+   <!-- slot 插槽 -->
+</view>
+
